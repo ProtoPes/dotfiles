@@ -6,9 +6,15 @@ bind-key j select-pane -D
 bind-key k select-pane -U
 bind-key l select-pane -R
 
+{{- if ne .chezmoi.hostname "megadeath9000" }}
+set -g prefix C-s
+{{- else }}
 set-option -g status-position top
+{{- end }}
+
 
 set -g mode-keys vi
+
 
 set -g @catppuccin_window_left_separator ""
 set -g @catppuccin_window_right_separator " "
