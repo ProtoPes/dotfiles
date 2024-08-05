@@ -1,0 +1,7 @@
+[user]
+	email = mokajin@protonmail.com
+	name = Mokajin
+[init]
+	defaultBranch = main
+[core]
+	editor = vim
