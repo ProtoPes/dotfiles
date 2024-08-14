@@ -1,0 +1,35 @@
+" Switch off compability with old VI
+set nocompatible
+
+" enable syntax and plugins
+syntax enable
+filetype plugin on
+
+" Search down into subfolders
+" Provides tab-completion for all file-related tasks
+set path+=**
+
+" Display all matching files when we tab complete
+set wildmenu
+
+" :b lets you autocomplete any open buffer
+
+" Create the `tags` file
+"command! MakeTags !ctags -R .
+
+" Tweaks for browsing
+
+let g:netrw_banner=0
+let g:netrw_browse_split=4
+let g:netrw_altv=1
+let g:netrw_liststyle=3
+" Use block cursor for normal mode, bar for insert
+let &t_SI = "\e[6 q" " bar
+let &t_EI = "\e[2 q" " block
+set ttimeoutlen=0 
+" Reset the cursor to block on start
+augroup myCmds
+au!
+autocmd VimEnter * silent !echo -ne "\e[2 q"
+autocmd VimEnter * redraw!
+augroup END
