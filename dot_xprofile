@@ -1,0 +1,8 @@
+#!/bin/sh
+
+exec setxkbmap -option caps:swapescape & # Swap esc and caps lock
+exec xsidle.sh slock & # Automatic lock screen
+exec slstatus & # Statusbar
+exec DISPLAY=":0" picom -b & # Compositor for smoothness
+exec ~/.fehbg & # Wallpaper
+exec firefox & # Start browser. Maybe redundant.

@@ -3,4 +3,5 @@ LICENSE
 
 {{- if ne .chezmoi.hostname "megadeath9000" }}
 .local/bin/screenshot*
+.xprofile
 {{- end }}
