@@ -1,43 +1,31 @@
-# Set prefix to CTRL-a on every machine except local
-{{- if ne .chezmoi.hostname "megadeath9000" }}
-set -g prefix C-a
-{{- else }}
-# Set status bar on top for local machine
-set-option -g status-position top
-{{- end }}
+# TODO: Create config for remote machines
+# Remote machines don't have to have visual plugins, only vim-motions
+# and default prefix to not overlap with home machine
 
+# I like vim motions
 set -g mode-keys vi
 
-set -g @plugin 'tmux-plugins/tpm' # Managing plugins
-set -g @plugin 'catppuccin/tmux' # Cool theme
+# Set prefix to CTRL-a
+unbind C-b
+set -g prefix C-a
+bind -n C-a send-prefix
+
+# Nice plugins here
+set -g @plugin "nordtheme/tmux" # Simple theme
+set -g @plugin 'alexwforsythe/tmux-which-key' # Popup menu with keys
 set -g @plugin 'tmux-plugins/tmux-sensible' # Community-driven common settings
 set -g @plugin 'tmux-plugins/tmux-pain-control' # Pane controlling bindings
 set -g @plugin 'tmux-plugins/tmux-resurrect' # Restore tmux environment after system restart.
 set -g @plugin 'tmux-plugins/tmux-continuum' # Automatic restoring tmux sessions after reboot.
 set -g @plugin 'tmux-plugins/tmux-sessionist' # Easy manipulating sessions
+set -g @plugin 'tmux-plugins/tpm' # Managing plugins
 
 set -g @continuum-restore 'on'
 set -g @resurrect-strategy-nvim 'session'
-set -g @catppuccin_window_left_separator ""
-set -g @catppuccin_window_right_separator " "
-set -g @catppuccin_window_middle_separator " █"
-set -g @catppuccin_window_number_position "right"
 
-set -g @catppuccin_window_default_fill "number"
-set -g @catppuccin_window_default_text "#W"
+# Tidying up config a little
+if "test ! -d $XDG_CONFIG_HOME/tmux/plugins/tpm" \
+   "run 'git clone https://github.com/tmux-plugins/tpm $XDG_CONFIG_HOME/tmux/plugins/tpm && $XDG_CONFIG_HOME/tmux/plugins/tpm/bin/install_plugins'"
 
-set -g @catppuccin_window_current_fill "number"
-set -g @catppuccin_window_current_text "#W"
-
-set -g @catppuccin_status_modules_right "directory session host date_time"
-set -g @catppuccin_status_left_separator  " "
-set -g @catppuccin_status_right_separator ""
-set -g @catppuccin_status_fill "icon"
-set -g @catppuccin_status_connect_separator "no"
-
-set -g @catppuccin_directory_text "#{pane_current_path}"
-
-if "test ! -d ~/.local/share/tmux/plugins/tpm" \
-   "run 'git clone https://github.com/tmux-plugins/tpm ~/.local/share/tmux/plugins/tpm && ~/.local/share/tmux/plugins/tpm/bin/install_plugins'"
-
-run '~/.local/share/tmux/plugins/tpm/tpm'
+run '$XDG_CONFIG_HOME/tmux/plugins/tpm/tpm'
+# When just cloned to new machine run CTRL-a+I to install plugins
