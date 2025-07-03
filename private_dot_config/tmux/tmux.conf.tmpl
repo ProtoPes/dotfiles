@@ -20,7 +20,8 @@ set -g @plugin 'tmux-plugins/tmux-continuum' # Automatic restoring tmux sessions
 set -g @plugin 'tmux-plugins/tmux-sessionist' # Easy manipulating sessions
 set -g @plugin 'tmux-plugins/tpm' # Managing plugins
 
-set -g @continuum-restore 'on'
+set -g @continuum-boot 'on' # Start tmux server upon login
+set -g @continuum-restore 'on' # Restore last saved environment
 set -g @resurrect-strategy-nvim 'session'
 
 # Tidying up config a little
