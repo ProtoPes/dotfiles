@@ -24,9 +24,12 @@ set -g @continuum-boot 'on' # Start tmux server upon login
 set -g @continuum-restore 'on' # Restore last saved environment
 set -g @resurrect-strategy-nvim 'session'
 
-# Tidying up config a little
-if "test ! -d $XDG_CONFIG_HOME/tmux/plugins/tpm" \
-   "run 'git clone https://github.com/tmux-plugins/tpm $XDG_CONFIG_HOME/tmux/plugins/tpm && $XDG_CONFIG_HOME/tmux/plugins/tpm/bin/install_plugins'"
+# Make tpm aware of non-usual plugins install dir
+set-environment -g TMUX_PLUGIN_MANAGER_PATH '~/.local/share/tmux/plugins/'
 
-run '$XDG_CONFIG_HOME/tmux/plugins/tpm/tpm'
+# Tidying up config a little
+if "test ! -d ~/.local/share/tmux/plugins/tpm" \
+   "run 'git clone https://github.com/tmux-plugins/tpm ~/.local/share/tmux/plugins/tpm && ~/.local/share/tmux/plugins/tpm/bin/install_plugins'"
+
+run '~/.local/share/tmux/plugins/tpm/tpm'
 # When just cloned to new machine run CTRL-a+I to install plugins
