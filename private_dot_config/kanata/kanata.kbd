@@ -1,0 +1,33 @@
+;; Otherwise only keys remapped here will work
+(defcfg
+  process-unmapped-keys yes
+)
+
+;; Describe which keys should be remapped
+(defsrc
+  a s d f j k l ;
+)
+;; tap-time: tap and quickly hold the key for trigger key repeat behavior
+;; hold-time: after which time hold behavior will be activated
+(defvar
+  tap-time 150
+  hold-time 200
+)
+
+;; Actual remapping happening here
+;; Lash two parameters: send keycode on tap, send keycode on hold
+(defalias
+  a (multi f24 (tap-hold $tap-time $hold-time a lmet))
+  s (multi f24 (tap-hold $tap-time $hold-time s lalt))
+  d (multi f24 (tap-hold $tap-time $hold-time d lsft))
+  f (multi f24 (tap-hold $tap-time $hold-time f lctl))
+  j (multi f24 (tap-hold $tap-time $hold-time j rctl))
+  k (multi f24 (tap-hold $tap-time $hold-time k rsft))
+  l (multi f24 (tap-hold $tap-time $hold-time l ralt))
+  ; (multi f24 (tap-hold $tap-time $hold-time ; rmet))
+)
+
+;; Using aliases described above
+(deflayer base
+  @a @s @d @f @j @k @l @;
+)
